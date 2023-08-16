@@ -16,6 +16,10 @@
 package com.baomidou.mybatisplus.core.injector;
 
 import com.baomidou.mybatisplus.core.injector.methods.*;
+import com.baomidou.mybatisplus.core.injector.methods.tdengine.InsertBatch;
+import com.baomidou.mybatisplus.core.injector.methods.tdengine.SelectLastList;
+import com.baomidou.mybatisplus.core.injector.methods.tdengine.SelectLastRowList;
+import com.baomidou.mybatisplus.core.mapper.TDengineBaseMapper;
 import com.baomidou.mybatisplus.core.metadata.TableInfo;
 
 import java.util.List;
@@ -35,13 +39,22 @@ public class DefaultSqlInjector extends AbstractSqlInjector {
     @Override
     public List<AbstractMethod> getMethodList(Class<?> mapperClass, TableInfo tableInfo) {
         Stream.Builder<AbstractMethod> builder = Stream.<AbstractMethod>builder()
-            .add(new Insert())
             .add(new Delete())
             .add(new Update())
             .add(new SelectCount())
             .add(new SelectMaps())
             .add(new SelectObjs())
             .add(new SelectList());
+
+        if (TDengineBaseMapper.class.isAssignableFrom(mapperClass)) {
+            builder.add(new com.baomidou.mybatisplus.core.injector.methods.tdengine.Insert())
+                .add(new InsertBatch())
+                .add(new SelectLastList())
+                .add(new SelectLastRowList());
+        } else {
+            builder.add(new Insert());
+        }
+
         if (tableInfo.havePK()) {
             builder.add(new DeleteById())
                 .add(new DeleteBatchByIds())

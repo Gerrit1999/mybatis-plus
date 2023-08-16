@@ -68,12 +68,15 @@ ext {
         "mysql"                      : "mysql:mysql-connector-java:8.0.30",
         "sqlite"                     : "org.xerial:sqlite-jdbc:3.39.2.0",
         "firebird"                   : "org.firebirdsql.jdbc:jaybird:4.0.6.java8",
+        "tdengine"                   : "com.taosdata.jdbc:taos-jdbcdriver:3.2.4",
         //cache
         "mybatis-ehcache"            : "org.mybatis.caches:mybatis-ehcache:1.2.3",
         "mybatis-redis"              : "org.mybatis.caches:mybatis-redis:1.0.0-beta2",
         "mybatis-caffeine"           : "org.mybatis.caches:mybatis-caffeine:1.0.0",
         //code generator
         "velocity"            : "org.apache.velocity:velocity-engine-core:2.3",
+        "commons-codec"       : "commons-codec:commons-codec:1.16.0",
+        "commons-text"        : "org.apache.commons:commons-text:1.10.0",
         "freemarker"          : "org.freemarker:freemarker:2.3.31",
         "beetl"               : "com.ibeetl:beetl:3.7.0.RELEASE",
         "swagger-annotations" : "io.swagger:swagger-annotations:1.6.2",

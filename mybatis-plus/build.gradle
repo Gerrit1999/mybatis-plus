@@ -19,6 +19,7 @@ dependencies {
     testImplementation "${lib.postgresql}"
     testImplementation lib.oracle as ConfigurableFileTree
     testImplementation "${lib.mysql}"
+    testImplementation "${lib.tdengine}"
     testImplementation "${lib.'mybatis-ehcache'}"
     testImplementation "${lib.'mybatis-redis'}"
     testImplementation "${lib.'spring-context-support'}"
