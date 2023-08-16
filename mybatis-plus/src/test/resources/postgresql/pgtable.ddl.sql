@@ -1,0 +1,6 @@
+CREATE TABLE "PGTABLE"
+(
+    "ID"        SERIAL PRIMARY KEY,
+    "COMP_NAME" VARCHAR(255),
+    "AGE"       INTEGER
+);

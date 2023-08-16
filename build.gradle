@@ -19,6 +19,7 @@ ext {
         springCloudVersion = '3.1.1',
         jsqlparserVersion = '4.6',
         junitVersion = '5.9.0',
+        testcontainersVersion = '1.18.3',
     ]
 
     lib = [
@@ -46,13 +47,16 @@ ext {
         //copy
         "mybatis-spring-boot-starter": "org.mybatis.spring.boot:mybatis-spring-boot-starter:${mybatisSpringBootStarterVersion}",
         //test
-        "spring-test"                : "org.springframework:spring-test:${springVersion}",
-        "assertj-core"               : "org.assertj:assertj-core:3.23.1",
-        "junit-jupiter"              : "org.junit.jupiter:junit-jupiter:${junitVersion}",
-        "fastjson"                   : "com.alibaba:fastjson:2.0.11",
-        "jackson"                    : "com.fasterxml.jackson.core:jackson-databind:2.13.3",
-        "gson"                       : "com.google.code.gson:gson:2.9.1",
-        "lagarto"                    : "org.jodd:jodd-lagarto:6.0.6",
+        "spring-test"                   : "org.springframework:spring-test:${springVersion}",
+        "testcontainers-junit-jupiter"  : "org.testcontainers:junit-jupiter:${testcontainersVersion}",
+        "testcontainers-jdbc"           : "org.testcontainers:jdbc:${testcontainersVersion}",
+        "testcontainers-postgresql"     : "org.testcontainers:postgresql:${testcontainersVersion}",
+        "assertj-core"                  : "org.assertj:assertj-core:3.23.1",
+        "junit-jupiter"                 : "org.junit.jupiter:junit-jupiter:${junitVersion}",
+        "fastjson"                      : "com.alibaba:fastjson:2.0.11",
+        "jackson"                       : "com.fasterxml.jackson.core:jackson-databind:2.13.3",
+        "gson"                          : "com.google.code.gson:gson:2.9.1",
+        "lagarto"                       : "org.jodd:jodd-lagarto:6.0.6",
         //datasource
         "p6spy"                      : "p6spy:p6spy:3.9.1",
         "sqlserver"                  : "com.microsoft.sqlserver:sqljdbc4:4.0",
@@ -185,7 +189,7 @@ subprojects {
 //                        "--add-opens", "java.base/java.lang.invoke=ALL-UNNAMED"]
 //        }
         exclude("**/phoenix/**")
-        exclude("**/postgresql/**")
+//        exclude("**/postgresql/**")
 //        exclude("**/generator/**")
     }
 

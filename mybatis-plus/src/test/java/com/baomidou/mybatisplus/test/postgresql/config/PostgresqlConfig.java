@@ -8,16 +8,15 @@ import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.type.JdbcType;
 import org.mybatis.spring.annotation.MapperScan;
-import org.postgresql.Driver;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.testcontainers.jdbc.ContainerDatabaseDriver;
 
 import javax.sql.DataSource;
 
 @Configuration
-@SuppressWarnings("unchecked")
 @EnableTransactionManagement
 @MapperScan("com.baomidou.mybatisplus.test.postgresql.mapper")
 public class PostgresqlConfig {
@@ -25,10 +24,10 @@ public class PostgresqlConfig {
     @Bean("dataSource")
     public DataSource dataSource() throws ClassNotFoundException {
         SimpleDriverDataSource dataSource = new SimpleDriverDataSource();
-        dataSource.setDriver(new Driver());
-        dataSource.setUrl("jdbc:postgresql://localhost:5432/test");
+        dataSource.setDriver(new ContainerDatabaseDriver());
+        dataSource.setUrl("jdbc:tc:postgresql:12-alpine://;/test?TC_DAEMON=true&TC_INITSCRIPT=postgresql/pgtable.ddl.sql");
         dataSource.setUsername("postgres");
-        dataSource.setPassword("123456");
+        dataSource.setPassword("root");
         return dataSource;
     }
 
@@ -49,8 +48,9 @@ public class PostgresqlConfig {
         sqlSessionFactory.setConfiguration(configuration);
         GlobalConfig globalConfig = new GlobalConfig();
         GlobalConfig.DbConfig dbConfig = new GlobalConfig.DbConfig();
-        // TODO 这里申明所有字段为大写
+        // 这里申明所有表名和字段名为大写
         dbConfig.setCapitalMode(true);
+        dbConfig.setTableFormat("\"%s\"");
         dbConfig.setColumnFormat("\"%s\"");
         globalConfig.setDbConfig(dbConfig);
         sqlSessionFactory.setGlobalConfig(globalConfig);
